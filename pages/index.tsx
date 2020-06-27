@@ -1,20 +1,18 @@
 import { getAllPokemon, getOnePokemon } from "../libs/pkmn";
-import Container from "../components/container";
+import PokemonProvider from "../context/PokeList";
 
-export default function Home({ pokemonList }) {
-  debugger;
+import PokemonComponent from "../components/PokemonComponent";
+
+export default function Home({ pokemonList: { info } }) {
   return (
-    <>
-      {pokemonList.info.map((pkmn) => (
-        <Container {...pkmn} />
-      ))}
-    </>
+    <PokemonProvider value={info}>
+      <PokemonComponent />
+    </PokemonProvider>
   );
 }
 
-export async function getStaticProps() {
+Home.getInitialProps = async (ctx) => {
   const { count, next, previous, results } = await getAllPokemon();
-
   const pokemonList = {
     count,
     next,
@@ -24,9 +22,5 @@ export async function getStaticProps() {
     ),
   };
 
-  return {
-    props: {
-      pokemonList,
-    },
-  };
-}
+  return { pokemonList };
+};

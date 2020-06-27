@@ -1,33 +1,32 @@
 import App from "next/app";
+import Theme from "../components/base/Theme";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   html,
   body {
     @font-face {
-      font-family: 'SF Pro Display';
-      src: url('//db.onlinewebfonts.com/t/0b51833ff62e4af8acb5fd3e2bf59e97.woff2') format("woff2");
+      font-family: 'SF Pro Display Bold';
+      src: url('/font/SFProDisplay-Bold.woff2') format("woff2");
+
+      font-family: 'SF Pro Display Regular';
+      src: url('/font/SFProDisplay-Regular.woff2') format("woff2");
    }
-   max-width: 36rem;
+   font-family: "SF Pro Display Regular";
+   max-width: 55rem;
    padding: 0 1rem;
    margin: 3rem auto 6rem;
   }
 `;
 
-const theme = {
-  colors: {
-    primary: "#0070f3",
-  },
-};
-
 export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <ThemeProvider theme={theme}>
+      <Theme>
         <GlobalStyle />
         <Component {...pageProps} />
-      </ThemeProvider>
+      </Theme>
     );
   }
 }
