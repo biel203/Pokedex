@@ -6,11 +6,6 @@ export const pokedex = "/pokedex";
 export const pokemonSpecies = "/pokemon-species";
 export const evolutionChain = "/evolution-chain";
 
-export const getAllPokemon = async () => {
-  const res = await fetch(`${basePath}${pokemonInfo}?limit=251&offset=000`);
-  return await res.json();
-};
-
 export const getPokemonGen = async (generation?: string) => {
   const res = await fetch(`${basePath}${pokedex}/${generation || "2"}`);
   return await res.json();
