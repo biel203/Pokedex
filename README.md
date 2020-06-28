@@ -1,6 +1,6 @@
 # Pokédex
 
-Essa aplicação foi desenvolvida em React com Typescript e NextJS, sendo todas as paginas de requisições e estáticas reenderizadas via SSR (Server-Side Rendering), fazendo a amostragem de dados mais rápida.
+Essa aplicação foi desenvolvida em React com TypeScript e NextJS, sendo todas as paginas de requisições e estáticas reenderizadas via SSR (Server-Side Rendering), fazendo a amostragem de dados mais rápida.
 
 Toda a estilização foi construida com Styled Components, sem o auxílio de libs como bootstrap ou material design.
 
