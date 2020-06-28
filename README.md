@@ -1,6 +1,12 @@
-# Example app with styled-components
+# Pokédex
+
+Essa aplicação foi desenvolvida em React com Typescript e NextJS, sendo todas as paginas de requisições e estáticas reenderizadas via SSR (Server-Side Rendering), fazendo a amostragem de dados mais rápida.
+
+Toda a estilização foi construida com Styled Components, sem o auxílio de libs como bootstrap ou material design.
 
 Para executar existem dois meios de acessar a Pokédex.
+
+## Passos para a execução da aplicação
 
 1. O Mais simples é acessar o link aonde ela está hospedada: [![Pokédex](https://pokedex-mrwnhrjp1.vercel.app/)]
 
