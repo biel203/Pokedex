@@ -20,7 +20,7 @@ export default function PokemonComponent() {
         <title>Pokédex</title>
       </Head>
       <FilterContainer>
-        <TitlePage>Pokedex</TitlePage>
+        <TitlePage>Pokédex</TitlePage>
         <Input
           type="text"
           value={filter}
