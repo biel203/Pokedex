@@ -5,6 +5,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
+    "prod": "next build && next start",
     "lint": "tslint 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
