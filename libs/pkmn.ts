@@ -7,7 +7,7 @@ export const pokemonSpecies = "/pokemon-species";
 export const evolutionChain = "/evolution-chain";
 
 export const getAllPokemon = async () => {
-  const res = await fetch(`${basePath}${pokemonInfo}?limit=9000&offset=000`);
+  const res = await fetch(`${basePath}${pokemonInfo}?limit=1000&offset=000`);
   return await res.json();
 };
 

@@ -1,4 +1,4 @@
-import { getPokemonGen, getOnePokemon } from "../libs/pkmn";
+import { getPokemonGen, getOnePokemon, getAllPokemon } from "../libs/pkmn";
 import PokemonProvider from "../context/PokeList";
 
 import PokemonComponent from "../components/PokemonComponent";
@@ -14,13 +14,11 @@ function Home({ pokemonList: { info } }) {
 export default Home;
 
 export const getStaticProps = async (ctx) => {
-  const { name, pokemon_entries } = await getPokemonGen();
+  // const { pokemon_entries } = await getPokemonGen();
+  const { results } = await getAllPokemon();
   const pokemonList = {
-    name,
     info: await Promise.all(
-      pokemon_entries.map(({ pokemon_species: { name } }) =>
-        getOnePokemon(name)
-      )
+      results.map(({ name }) => (name ? getOnePokemon(name) : false))
     ),
   };
 

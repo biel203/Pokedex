@@ -43,7 +43,8 @@ export default function AboutDetail() {
         <Li>
           <Title>Weight</Title>
           <Result>
-            {weight / 10}kg <Convert>({(weight * 2.2046) / 10}lbs)</Convert>
+            {weight / 10}kg
+            <Convert>({((weight * 2.2046) / 10).toFixed(2)}lbs)</Convert>
           </Result>
         </Li>
         <Li>
