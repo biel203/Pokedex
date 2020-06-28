@@ -42,8 +42,9 @@ class Tabs extends React.Component<Props, State> {
     return (
       <TabsWrapper>
         <TabList breakPoint={tabBreak} role="tablist">
-          //@ts-ignore
-          {React.Children.map(children, ({ props: { label } }, index) => {
+          {React.Children.map(children, (child, index) => {
+            //@ts-ignore
+            const { label } = child.props;
             return (
               <TabButton
                 role="tab"
