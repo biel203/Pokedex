@@ -27,7 +27,9 @@ export default function PokemonDetail({ pokemon, evoChain, species }) {
       </Head>
       <DetailHeader />
       <DetailMain />
-      <Link href="/">Voltar</Link>
+      <Link href="/">
+        <a href="">Voltar</a>
+      </Link>
     </PokemonDetailProvider>
   );
 }

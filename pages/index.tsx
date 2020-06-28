@@ -3,15 +3,17 @@ import PokemonProvider from "../context/PokeList";
 
 import PokemonComponent from "../components/PokemonComponent";
 
-export default function Home({ pokemonList: { info } }) {
+function Home({ pokemonList: { info } }) {
   return (
-    <PokemonProvider value={{ info }}>
+    <PokemonProvider value={info}>
       <PokemonComponent />
     </PokemonProvider>
   );
 }
 
-Home.getInitialProps = async (ctx) => {
+export default Home;
+
+export const getStaticProps = async (ctx) => {
   const { name, pokemon_entries } = await getPokemonGen();
   const pokemonList = {
     name,
@@ -22,5 +24,5 @@ Home.getInitialProps = async (ctx) => {
     ),
   };
 
-  return { pokemonList };
+  return { props: { pokemonList } };
 };
