@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import styled from "styled-components";
 
 const TabContent = styled.div`
@@ -6,7 +6,7 @@ const TabContent = styled.div`
   width: 100%;
 `;
 
-const TabPanel = ({ children }) => (
+const TabPanel = ({ children, label }) => (
   <TabContent role="tabpanel" tabindex="0">
     {children}
   </TabContent>
@@ -14,6 +14,7 @@ const TabPanel = ({ children }) => (
 
 interface Props {
   tabBreak?: string;
+  label?: string;
 }
 
 interface State {
@@ -22,7 +23,7 @@ interface State {
   selectedTab: number;
 }
 
-class Tabs extends Component<Props, State> {
+class Tabs extends React.Component<Props, State> {
   static Panel = TabPanel;
 
   state: State = {
@@ -41,16 +42,19 @@ class Tabs extends Component<Props, State> {
     return (
       <TabsWrapper>
         <TabList breakPoint={tabBreak} role="tablist">
-          {React.Children.map(children, ({ props: { label } }, index) => (
-            <TabButton
-              role="tab"
-              selected={selectedTab === index}
-              aria-selected={selectedTab === index ? "true" : "false"}
-              onClick={() => this.selectTab(index)}
-            >
-              {label}
-            </TabButton>
-          ))}
+          //@ts-ignore
+          {React.Children.map(children, ({ props: { label } }, index) => {
+            return (
+              <TabButton
+                role="tab"
+                selected={selectedTab === index}
+                aria-selected={selectedTab === index ? "true" : "false"}
+                onClick={() => this.selectTab(index)}
+              >
+                {label}
+              </TabButton>
+            );
+          })}
         </TabList>
 
         <Content>
