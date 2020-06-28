@@ -4,6 +4,48 @@ import Link from "next/link";
 
 import { usePkmnContext } from "../context/PokeList";
 
+export default function PokemonComponent() {
+  const { pkmnList } = usePkmnContext();
+  return (
+    <div>
+      <Ul>
+        {pkmnList.map(({ id, name, types }) => {
+          return (
+            <Link href="/detail/[pkmn]" as={`/detail/${id}`} passHref>
+              <Li>
+                <ImageSpan>
+                  <Img
+                    src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
+                    alt=""
+                  />
+                </ImageSpan>
+
+                <Content type={types[0].type.name}>
+                  <PkmnInfo>
+                    <Number>#{("000" + id).slice(-3)}</Number>
+                    <Name>{_.startCase(name)}</Name>
+                    <Title>
+                      {types.map(({ type: { name } }) => (
+                        <Badge type={name} key={name}>
+                          <IconType
+                            src={`/vectors/types/${name}.svg`}
+                            alt="Type Pokemon"
+                          ></IconType>
+                          {_.startCase(name)}
+                        </Badge>
+                      ))}
+                    </Title>
+                  </PkmnInfo>
+                </Content>
+              </Li>
+            </Link>
+          );
+        })}
+      </Ul>
+    </div>
+  );
+}
+
 const Ul = styled.ul`
   text-align: justify;
   ${this}:after {
@@ -93,45 +135,3 @@ const IconType = styled.img`
   margin: 0px 3px -4px 0;
   filter: brightness(100);
 `;
-
-export default function PokemonComponent() {
-  const { pkmnList } = usePkmnContext();
-  return (
-    <div>
-      <Ul>
-        {pkmnList.map(({ id, name, types }) => {
-          return (
-            <Link href="/detail/[pkmn]" as={`/detail/${id}`} passHref>
-              <Li>
-                <ImageSpan>
-                  <Img
-                    src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
-                    alt=""
-                  />
-                </ImageSpan>
-
-                <Content type={types[0].type.name}>
-                  <PkmnInfo>
-                    <Number>#{("000" + id).slice(-3)}</Number>
-                    <Name>{_.startCase(name)}</Name>
-                    <Title>
-                      {types.map(({ type: { name } }) => (
-                        <Badge type={name} key={name}>
-                          <IconType
-                            src={`/vectors/types/${name}.svg`}
-                            alt="Type Pokemon"
-                          ></IconType>
-                          {_.startCase(name)}
-                        </Badge>
-                      ))}
-                    </Title>
-                  </PkmnInfo>
-                </Content>
-              </Li>
-            </Link>
-          );
-        })}
-      </Ul>
-    </div>
-  );
-}

@@ -10,6 +10,7 @@ import {
 } from "../../libs/pkmn";
 import DetailHeader from "../../components/detail/DetailHeader";
 import DetailMain from "../../components/detail/DetailMain";
+import PokemonDetailProvider from "../../context/PokeDetail";
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -19,15 +20,15 @@ const GlobalStyle = createGlobalStyle`
 
 export default function PokemonDetail({ pokemon, evoChain, species }) {
   return (
-    <>
+    <PokemonDetailProvider value={{ pokemon, evoChain, species }}>
       <GlobalStyle type={pokemon.types[0].type.name} />
       <Head>
         <title>{pokemon.name}</title>
       </Head>
-      <DetailHeader pkmn={pokemon} />
-      <DetailMain pkmn={pokemon} evoChain={evoChain} species={species} />
+      <DetailHeader />
+      <DetailMain />
       <Link href="/">Voltar</Link>
-    </>
+    </PokemonDetailProvider>
   );
 }
 export async function getStaticPaths() {
