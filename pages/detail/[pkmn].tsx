@@ -1,10 +1,15 @@
 import Head from "next/head";
 import Link from "next/link";
-
-import { getOnePokemon, getPokemonGen } from "../../libs/pkmn";
-import DetailLayout from "../../components/DetailLayout";
-
 import { createGlobalStyle } from "styled-components";
+
+import {
+  getOnePokemon,
+  getPokemonGen,
+  getEvolutionChainPokemon,
+  getSpeciesPokemon,
+} from "../../libs/pkmn";
+import DetailHeader from "../../components/detail/DetailHeader";
+import DetailMain from "../../components/detail/DetailMain";
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -12,14 +17,15 @@ const GlobalStyle = createGlobalStyle`
       props.theme.colors.background.type[props.type]}
 `;
 
-export default function Post({ postData }) {
+export default function PokemonDetail({ pokemon, evoChain, species }) {
   return (
     <>
-      <GlobalStyle type={postData.types[0].type.name} />
+      <GlobalStyle type={pokemon.types[0].type.name} />
       <Head>
-        <title>{postData.name}</title>
+        <title>{pokemon.name}</title>
       </Head>
-      <DetailLayout pkmn={postData} />
+      <DetailHeader pkmn={pokemon} />
+      <DetailMain pkmn={pokemon} evoChain={evoChain} species={species} />
       <Link href="/">Voltar</Link>
     </>
   );
@@ -29,7 +35,6 @@ export async function getStaticPaths() {
   const paths = pokemon_entries.map(({ entry_number }) => ({
     params: { pkmn: String(entry_number) },
   }));
-  console.log(paths);
   return {
     paths,
     fallback: false,
@@ -37,10 +42,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { pkmn } }) {
-  const postData = await getOnePokemon(pkmn);
+  const [pokemon, evoChain, species] = await Promise.all([
+    await getOnePokemon(pkmn),
+    await getEvolutionChainPokemon(pkmn),
+    await getSpeciesPokemon(pkmn),
+  ]);
   return {
     props: {
-      postData,
+      pokemon,
+      evoChain,
+      species,
     },
   };
 }
