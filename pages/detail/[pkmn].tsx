@@ -6,6 +6,7 @@ import _ from "lodash";
 import {
   getOnePokemon,
   getPokemonGen,
+  getAllPokemon,
   getEvolutionChainPokemon,
   getSpeciesPokemon,
 } from "../../libs/pkmn";
@@ -49,9 +50,9 @@ const A = styled.a`
   }
 `;
 export async function getStaticPaths() {
-  const { pokemon_entries } = await getPokemonGen();
-  const paths = pokemon_entries.map(({ entry_number }) => ({
-    params: { pkmn: String(entry_number) },
+  const { results } = await getAllPokemon();
+  const paths = results.map(({ name }, index) => ({
+    params: { pkmn: String(index + 1) },
   }));
   return {
     paths,
