@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+import _ from "lodash";
 
 import {
   getOnePokemon,
@@ -23,16 +24,30 @@ export default function PokemonDetail({ pokemon, evoChain, species }) {
     <PokemonDetailProvider value={{ pokemon, evoChain, species }}>
       <GlobalStyle type={pokemon.types[0].type.name} />
       <Head>
-        <title>{pokemon.name}</title>
+        <link
+          rel="shortcut icon"
+          href={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
+        />
+        <title>{_.startCase(pokemon.name)}</title>
       </Head>
+      <header>
+        <Link href="/">
+          <A href="">Voltar</A>
+        </Link>
+      </header>
       <DetailHeader />
       <DetailMain />
-      <Link href="/">
-        <a href="">Voltar</a>
-      </Link>
     </PokemonDetailProvider>
   );
 }
+
+const A = styled.a`
+  color: #fff;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 export async function getStaticPaths() {
   const { pokemon_entries } = await getPokemonGen();
   const paths = pokemon_entries.map(({ entry_number }) => ({

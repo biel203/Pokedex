@@ -28,7 +28,7 @@ const theme = {
         bug: "#8BD674",
         dark: "#6F6E78",
         dragon: "#7383B9",
-        eletric: "#F2CB55",
+        electric: "#F2CB55",
         fairy: "#EBA8C3",
         fighting: "#EB4971",
         fire: "#FFA756",

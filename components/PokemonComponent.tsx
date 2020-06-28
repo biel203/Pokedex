@@ -1,52 +1,111 @@
+import { useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import Link from "next/link";
+import Head from "next/head";
 
 import { usePkmnContext } from "../context/PokeList";
 
 export default function PokemonComponent() {
   const { pkmnList: info } = usePkmnContext();
+  const [filter, setFilter] = useState("");
+
+  const handleChange = (evt) => {
+    setFilter(evt.target.value);
+  };
   return (
     <div>
+      <Head>
+        <link rel="shortcut icon" href="/vectors/pokeball-fv.svg" />
+        <title>Pokédex</title>
+      </Head>
+      <FilterContainer>
+        <TitlePage>Pokedex</TitlePage>
+        <Input
+          type="text"
+          value={filter}
+          onChange={handleChange}
+          placeholder={"What Pokémon are you looking for?"}
+        />
+      </FilterContainer>
       <Ul>
-        {info.map(({ id, name, types }) => {
-          return (
-            <Link href="/detail/[pkmn]" as={`/detail/${id}`} passHref key={id}>
-              <a href="">
-                <Li>
-                  <ImageSpan>
-                    <Img
-                      src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
-                      alt=""
-                    />
-                  </ImageSpan>
+        {info
+          .filter(({ id, name, types }) => {
+            if (!filter) {
+              return true;
+            }
 
-                  <Content type={types[0].type.name}>
-                    <PkmnInfo>
-                      <Number>#{("000" + id).slice(-3)}</Number>
-                      <Name>{_.startCase(name)}</Name>
-                      <Title>
-                        {types.map(({ type: { name } }) => (
-                          <Badge type={name} key={name}>
-                            <IconType
-                              src={`/vectors/types/${name}.svg`}
-                              alt="Type Pokemon"
-                            ></IconType>
-                            {_.startCase(name)}
-                          </Badge>
-                        ))}
-                      </Title>
-                    </PkmnInfo>
-                  </Content>
-                </Li>
-              </a>
-            </Link>
-          );
-        })}
+            if (
+              name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
+              String(id).indexOf(filter) > -1
+            ) {
+              return true;
+            }
+          })
+          .map(({ id, name, types }) => {
+            return (
+              <Link
+                href="/detail/[pkmn]"
+                as={`/detail/${id}`}
+                passHref
+                key={id}
+              >
+                <a href="">
+                  <Li>
+                    <ImageSpan>
+                      <Img
+                        src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
+                        alt=""
+                      />
+                    </ImageSpan>
+
+                    <Content type={types[0].type.name}>
+                      <PkmnInfo>
+                        <Number>#{("000" + id).slice(-3)}</Number>
+                        <Name>{_.startCase(name)}</Name>
+                        <Title>
+                          {types.map(({ type: { name } }) => (
+                            <Badge type={name} key={name}>
+                              <IconType
+                                src={`/vectors/types/${name}.svg`}
+                                alt="Type Pokemon"
+                              ></IconType>
+                              {_.startCase(name)}
+                            </Badge>
+                          ))}
+                        </Title>
+                      </PkmnInfo>
+                    </Content>
+                  </Li>
+                </a>
+              </Link>
+            );
+          })}
       </Ul>
     </div>
   );
 }
+
+const TitlePage = styled.div`
+  font-size: 56px;
+  text-align: left;
+  margin-left: 45px;
+`;
+const FilterContainer = styled.div`
+  text-align: right;
+`;
+
+const Input = styled.input`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: #747476;
+  background: #f2f2f2;
+  border: none;
+  width: 30%;
+  border-radius: 3px;
+  margin-right: 60px;
+  text-align: center;
+`;
 
 const Ul = styled.ul`
   text-align: justify;
