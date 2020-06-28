@@ -8,7 +8,7 @@ Para executar existem dois meios de acessar a Pokédex.
 
 ## Passos para a execução da aplicação
 
-1. O Mais simples é acessar o link aonde ela está hospedada: [![Pokédex](https://pokedex-mrwnhrjp1.vercel.app/)]
+1. O Mais simples é acessar o link aonde ela está hospedada: [Pokédex](https://pokedex-nine-psi.vercel.app/)
 
 2. Também poderá fazer o clone desse repositório, como descrito abaixo.
 
