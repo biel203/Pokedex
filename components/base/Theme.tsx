@@ -46,6 +46,7 @@ const theme = {
       },
     },
   },
+  background: "yellow",
   fonts: ["sans-serif", "Roboto"],
 };
 

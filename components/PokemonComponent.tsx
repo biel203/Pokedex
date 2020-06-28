@@ -94,19 +94,14 @@ const IconType = styled.img`
   filter: brightness(100);
 `;
 
-const StyledLink = styled(Link)`
-  background-color: "black" !important;
-`;
-
 export default function PokemonComponent() {
   const { pkmnList } = usePkmnContext();
-  debugger;
   return (
     <div>
       <Ul>
         {pkmnList.map(({ id, name, types }) => {
           return (
-            <StyledLink href="/vectors/types/bug.svg">
+            <Link href="/detail/[pkmn]" as={`/detail/${id}`} passHref>
               <Li>
                 <ImageSpan>
                   <Img
@@ -133,7 +128,7 @@ export default function PokemonComponent() {
                   </PkmnInfo>
                 </Content>
               </Li>
-            </StyledLink>
+            </Link>
           );
         })}
       </Ul>
