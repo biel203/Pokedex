@@ -5,7 +5,7 @@ import PokemonComponent from "../components/PokemonComponent";
 
 export default function Home({ pokemonList: { info } }) {
   return (
-    <PokemonProvider value={info}>
+    <PokemonProvider value={{ info }}>
       <PokemonComponent />
     </PokemonProvider>
   );

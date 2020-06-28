@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 
-const PokemonContext = createContext([]);
+const PokemonContext = createContext({});
 
 export default function ListProvider({ children, value }) {
   const [pkmnList, setPkmnList] = useState(value);
