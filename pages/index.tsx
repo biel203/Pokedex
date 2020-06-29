@@ -1,11 +1,11 @@
-import { getPokemonGen, getOnePokemon } from "../libs/pkmn";
+import { getInitialData } from "../libs/pkmn";
 import PokemonProvider from "../context/PokeList";
 
 import PokemonComponent from "../components/PokemonComponent";
 
-function Home({ pokemonList: { info } }) {
+function Home({ pokemonList }) {
   return (
-    <PokemonProvider value={info}>
+    <PokemonProvider value={pokemonList}>
       <PokemonComponent />
     </PokemonProvider>
   );
@@ -14,14 +14,7 @@ function Home({ pokemonList: { info } }) {
 export default Home;
 
 export const getStaticProps = async (ctx) => {
-  const { pokemon_entries } = await getPokemonGen();
-  const pokemonList = {
-    info: await Promise.all(
-      pokemon_entries.map(({ pokemon_species: { name } }) =>
-        getOnePokemon(name)
-      )
-    ),
-  };
+  const pokemonList = await getInitialData("1")
 
   return { props: { pokemonList } };
 };
