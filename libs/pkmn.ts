@@ -15,12 +15,19 @@ export const getPokemonGen = async (value?: string) => {
 export const getOnePokemon = async (name: string) => {
   const res = await fetch(`${basePath}${pokemonInfo}/${name}`);
 
+  if (res.status !== 200) {
+    return "/noPoke"
+  }
+
   return await res.json();
 };
 
 export const getEvolutionChainPokemon = async (value: string) => {
   const res = await fetch(`${basePath}${evolutionChain}/${value}`);
 
+  if (res.status !== 200) {
+    return "/noEvo"
+  }
   return await res.json();
 };
 
@@ -34,9 +41,12 @@ export const getInitialData = async (value: string) => {
   const { pokemon_species } = await getPokemonGen(value);
   const pokemonList = {
     info: await Promise.all(
-        pokemon_species.map(({ name } ) =>
-        getOnePokemon(name)
-      )
+        pokemon_species.map(({ name } ) => {
+          if (!name) {
+            return false
+          }
+          return getOnePokemon(name)
+        })
     ),
   };
   return pokemonList.info.sort((a: any,b: any) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0)
