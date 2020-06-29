@@ -13,7 +13,6 @@ export default function PokemonComponent() {
   const handleChange = (evt) => {
     setFilter(evt.target.value);
   };
-  debugger
   return (
     <div>
       <Head>
@@ -25,6 +24,7 @@ export default function PokemonComponent() {
         <LinkGen>
           <Link href="/"><A href="">1 Geração</A></Link>
           <Link href="/list/secound-gen"><A href="">2 Geração</A></Link>
+          <Link href="/list/third-gen"><A href="">3 Geração</A></Link>
         </LinkGen>
         <Input
           type="text"
@@ -48,6 +48,9 @@ export default function PokemonComponent() {
             }
           })
           .map(({ id, name, types }) => {
+            if (!types || !name) {
+              return
+            }
             return (
               <Link
                 href="/detail/[pkmn]"
