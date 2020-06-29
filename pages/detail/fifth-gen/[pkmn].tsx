@@ -6,12 +6,10 @@ import _ from "lodash";
 import {
   getDetailProps,
   getStaticPahs,
-  getEvolutionChainPokemon,
-  getSpeciesPokemon,
-} from "../../libs/pkmn";
-import DetailHeader from "../../components/detail/DetailHeader";
-import DetailMain from "../../components/detail/DetailMain";
-import PokemonDetailProvider from "../../context/PokeDetail";
+} from "../../../libs/pkmn";
+import DetailHeader from "../../../components/detail/DetailHeader";
+import DetailMain from "../../../components/detail/DetailMain";
+import PokemonDetailProvider from "../../../context/PokeDetail";
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -49,7 +47,7 @@ const A = styled.a`
   }
 `;
 export async function getStaticPaths() {
-  const paths = await getStaticPahs("1")
+  const paths = await getStaticPahs("5")
   return {
     paths,
     fallback: false,
