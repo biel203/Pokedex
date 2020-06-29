@@ -13,6 +13,7 @@ export default function PokemonComponent() {
   const handleChange = (evt) => {
     setFilter(evt.target.value);
   };
+  debugger
   return (
     <div>
       <Head>
@@ -21,6 +22,10 @@ export default function PokemonComponent() {
       </Head>
       <FilterContainer>
         <TitlePage>Pokédex</TitlePage>
+        <LinkGen>
+          <Link href="/"><A href="">1 Geração</A></Link>
+          <Link href="/list/secound-gen"><A href="">2 Geração</A></Link>
+        </LinkGen>
         <Input
           type="text"
           value={filter}
@@ -29,7 +34,7 @@ export default function PokemonComponent() {
         />
       </FilterContainer>
       <Ul>
-        {info
+        {info && info
           .filter(({ id, name, types }) => {
             if (!filter) {
               return true;
@@ -85,6 +90,13 @@ export default function PokemonComponent() {
     </div>
   );
 }
+
+const LinkGen = styled.div`
+  margin: 0.5em 60px 0.5em 0.5em;
+`;
+const A = styled.a`
+  margin-left: 10px;
+`;
 
 const TitlePage = styled.div`
   font-size: 56px;

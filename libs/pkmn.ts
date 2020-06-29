@@ -45,7 +45,7 @@ export const getInitialData = async (value: string) => {
 export const getStaticPahs = async (value: string) => {
   const { pokemon_species } = await getPokemonGen(value);
   const paths = pokemon_species.map(({ entry_number }, index) => ({
-    params: { pkmn: String(index) },
+    params: { pkmn: String(index + 1) },
   }));
 
   return paths;

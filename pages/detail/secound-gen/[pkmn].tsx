@@ -4,14 +4,12 @@ import styled, { createGlobalStyle } from "styled-components";
 import _ from "lodash";
 
 import {
-  getDetailProps,
-  getStaticPahs,
-  getEvolutionChainPokemon,
-  getSpeciesPokemon,
-} from "../../libs/pkmn";
-import DetailHeader from "../../components/detail/DetailHeader";
-import DetailMain from "../../components/detail/DetailMain";
-import PokemonDetailProvider from "../../context/PokeDetail";
+    getDetailProps,
+    getStaticPahs,
+} from "../../../libs/pkmn";
+import DetailHeader from "../../../components/detail/DetailHeader";
+import DetailMain from "../../../components/detail/DetailMain";
+import PokemonDetailProvider from "../../../context/PokeDetail";
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -31,7 +29,7 @@ export default function PokemonDetail({ pokemon, evoChain, species }) {
         <title>{_.startCase(pokemon.name)}</title>
       </Head>
       <header>
-        <Link href="/">
+        <Link href="/list/secound-gen/">
           <A href="">Voltar</A>
         </Link>
       </header>
@@ -49,7 +47,7 @@ const A = styled.a`
   }
 `;
 export async function getStaticPaths() {
-  const paths = await getStaticPahs("1")
+    const paths = await getStaticPahs("2")
   return {
     paths,
     fallback: false,
@@ -57,9 +55,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { pkmn } }) {
-  const {pokemon, evoChain, species} = await getDetailProps(pkmn)
-  
+    const {pokemon, evoChain, species} = await getDetailProps(pkmn)
   return {
-    props: {pokemon, evoChain, species},
+    props: {
+      pokemon,
+      evoChain,
+      species,
+    },
   };
 }
