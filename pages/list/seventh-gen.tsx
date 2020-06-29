@@ -3,7 +3,7 @@ import PokemonProvider from "../../context/PokeList";
 
 import PokemonComponent from "../../components/PokemonComponent";
 
-function SixthGen({ pokemonList }) {
+function SeventhGen({ pokemonList }) {
   return (
     <PokemonProvider value={pokemonList}>
       <PokemonComponent />
@@ -11,10 +11,10 @@ function SixthGen({ pokemonList }) {
   );
 }
 
-export default SixthGen;
+export default SeventhGen;
 
 export const getStaticProps = async (ctx) => {
-  const pokemonList = await getInitialData("6")
+  const pokemonList = await getInitialData("7")
 
   return { props: { pokemonList } };
 };
