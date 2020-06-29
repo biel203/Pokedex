@@ -22,13 +22,14 @@ export default function PokemonComponent() {
       <FilterContainer>
         <TitlePage>Pokédex</TitlePage>
         <LinkGen>
-          <Link href="/"><A href="">1 Geração</A></Link>
-          <Link href="/list/secound-gen"><A href="">2 Geração</A></Link>
-          <Link href="/list/third-gen"><A href="">3 Geração</A></Link>
-          <Link href="/list/fourth-gen"><A href="">4 Geração</A></Link>
-          <Link href="/list/fifth-gen"><A href="">5 Geração</A></Link>
-          <Link href="/list/sixth-gen"><A href="">6 Geração</A></Link>
-          <Link href="/list/seventh-gen"><A href="">7 Geração</A></Link>
+          <Link href="/"><A href="">1ª Geração</A></Link>
+          <Link href="/list/secound-gen"><A href="">2ª Geração</A></Link>
+          <Link href="/list/third-gen"><A href="">3ª Geração</A></Link>
+          <Link href="/list/fourth-gen"><A href="">4ª Geração</A></Link>
+          <Link href="/list/fifth-gen"><A href="">5ª Geração</A></Link>
+          <Link href="/list/sixth-gen"><A href="">6ª Geração</A></Link>
+          <Link href="/list/seventh-gen"><A href="">7ª Geração</A></Link>
+          
         </LinkGen>
         <Input
           type="text"
@@ -53,7 +54,7 @@ export default function PokemonComponent() {
           })
           .map(({ id, name, types }) => {
             if (!types || !name) {
-              return
+              return false
             }
             return (
               <Link
@@ -71,7 +72,7 @@ export default function PokemonComponent() {
                       />
                     </ImageSpan>
 
-                    <Content type={types[0].type.name}>
+                    <Content type={types ? types[0].type.name : "grey"}>
                       <PkmnInfo>
                         <Number>#{("000" + id).slice(-3)}</Number>
                         <Name>{_.startCase(name)}</Name>
