@@ -28,6 +28,7 @@ export default function PokemonComponent() {
           <Link href="/list/fourth-gen"><A href="">4 Geração</A></Link>
           <Link href="/list/fifth-gen"><A href="">5 Geração</A></Link>
           <Link href="/list/sixth-gen"><A href="">6 Geração</A></Link>
+          <Link href="/list/seventh-gen"><A href="">7 Geração</A></Link>
         </LinkGen>
         <Input
           type="text"
