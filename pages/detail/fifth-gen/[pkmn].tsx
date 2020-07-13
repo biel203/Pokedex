@@ -1,17 +1,17 @@
+import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import styled, { createGlobalStyle } from "styled-components";
 import _ from "lodash";
 
-import {
-  getDetailProps,
-  getStaticPahs,
-} from "../../../libs/pkmn";
+import { getDetailProps, getStaticPahs } from "../../../libs/pkmn";
 import DetailHeader from "../../../components/detail/DetailHeader";
 import DetailMain from "../../../components/detail/DetailMain";
 import PokemonDetailProvider from "../../../context/PokeDetail";
 
-const GlobalStyle = createGlobalStyle`
+import { ChangeColorType } from "../../../interfaces";
+
+const GlobalStyle = createGlobalStyle<ChangeColorType>`
   html, body {
     background-color: ${(props) =>
       props.theme.colors.background.type[props.type]}
@@ -47,7 +47,7 @@ const A = styled.a`
   }
 `;
 export async function getStaticPaths() {
-  const paths = await getStaticPahs("5")
+  const paths = await getStaticPahs("5");
   return {
     paths,
     fallback: false,
@@ -55,9 +55,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { pkmn } }) {
-  const {pokemon, evoChain, species} = await getDetailProps(pkmn)
-  
+  const { pokemon, evoChain, species } = await getDetailProps(pkmn);
+
   return {
-    props: {pokemon, evoChain, species},
+    props: { pokemon, evoChain, species },
   };
 }

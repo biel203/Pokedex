@@ -1,3 +1,4 @@
+import React from "react";
 import { getInitialData } from "../../libs/pkmn";
 import PokemonProvider from "../../context/PokeList";
 
@@ -14,7 +15,7 @@ function FifthGen({ pokemonList }) {
 export default FifthGen;
 
 export const getStaticProps = async (ctx) => {
-  const pokemonList = await getInitialData("5")
+  const pokemonList = await getInitialData("5");
 
   return { props: { pokemonList } };
 };

@@ -1,7 +1,7 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, DefaultTheme } from "styled-components";
 
-const theme = {
+const theme: DefaultTheme = {
   colors: {
     type: {
       bug: "#8CB230",

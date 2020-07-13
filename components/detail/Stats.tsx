@@ -1,9 +1,11 @@
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 
 import ProgressBar from "../base/ProgressBar";
 
 import { useDetailContext } from "../../context/PokeDetail";
+import { ChangeColorType } from "../../interfaces/styled";
 
 const dictionary = {
   hp: "HP",
@@ -39,7 +41,7 @@ export default function Statspokemon() {
 
 const Ul = styled.ul`
   text-align: justify;
-  ${this}:after {
+  &:after {
     content: "";
     display: inline-block;
     width: 100%;
@@ -58,7 +60,7 @@ const Name = styled.div`
   width: 100px;
 `;
 
-const LiTitle = styled(Li)`
+const LiTitle = styled(Li)<ChangeColorType>`
   font-size: 16px;
   font-weight: bold;
   color: ${(props) => props.theme.colors.type[props.type]};

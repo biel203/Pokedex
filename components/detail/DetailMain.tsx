@@ -1,7 +1,8 @@
 import _ from "lodash";
 
-import Tabs from "../../components/base/Tabs";
+import { Tabs, Panel } from "../../components/base/Tabs";
 
+import React from "react";
 import Stats from "../../components/detail/Stats";
 import About from "../../components/detail/About";
 
@@ -9,12 +10,12 @@ export default function DetaiMain() {
   return (
     <>
       <Tabs>
-        <Tabs.Panel label={"About"}>
+        <Panel label={"About"}>
           <About />
-        </Tabs.Panel>
-        <Tabs.Panel label="Stats">
+        </Panel>
+        <Panel label="Stats">
           <Stats />
-        </Tabs.Panel>
+        </Panel>
       </Tabs>
     </>
   );

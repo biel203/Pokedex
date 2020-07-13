@@ -1,9 +1,11 @@
+import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import Link from "next/link";
 import Head from "next/head";
 
+import { ChangeColorType } from "../interfaces";
 import { usePkmnContext } from "../context/PokeList";
 
 export default function PokemonComponent() {
@@ -22,14 +24,27 @@ export default function PokemonComponent() {
       <FilterContainer>
         <TitlePage>Pokédex</TitlePage>
         <LinkGen>
-          <Link href="/"><A href="">1ª Geração</A></Link>
-          <Link href="/list/secound-gen"><A href="">2ª Geração</A></Link>
-          <Link href="/list/third-gen"><A href="">3ª Geração</A></Link>
-          <Link href="/list/fourth-gen"><A href="">4ª Geração</A></Link>
-          <Link href="/list/fifth-gen"><A href="">5ª Geração</A></Link>
-          <Link href="/list/sixth-gen"><A href="">6ª Geração</A></Link>
-          <Link href="/list/seventh-gen"><A href="">7ª Geração</A></Link>
-          
+          <Link href="/">
+            <A href="">1ª Geração</A>
+          </Link>
+          <Link href="/list/secound-gen">
+            <A href="">2ª Geração</A>
+          </Link>
+          <Link href="/list/third-gen">
+            <A href="">3ª Geração</A>
+          </Link>
+          <Link href="/list/fourth-gen">
+            <A href="">4ª Geração</A>
+          </Link>
+          <Link href="/list/fifth-gen">
+            <A href="">5ª Geração</A>
+          </Link>
+          <Link href="/list/sixth-gen">
+            <A href="">6ª Geração</A>
+          </Link>
+          <Link href="/list/seventh-gen">
+            <A href="">7ª Geração</A>
+          </Link>
         </LinkGen>
         <Input
           type="text"
@@ -39,61 +54,62 @@ export default function PokemonComponent() {
         />
       </FilterContainer>
       <Ul>
-        {info && info
-          .filter(({ id, name, types }) => {
-            if (!filter) {
-              return true;
-            }
+        {info &&
+          info
+            .filter(({ id, name, types }) => {
+              if (!filter) {
+                return true;
+              }
 
-            if (
-              name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
-              String(id).indexOf(filter) > -1
-            ) {
-              return true;
-            }
-          })
-          .map(({ id, name, types }) => {
-            if (!types || !name) {
-              return false
-            }
-            return (
-              <Link
-                href="/detail/[pkmn]"
-                as={`/detail/${id}`}
-                passHref
-                key={id}
-              >
-                <a href="">
-                  <Li>
-                    <ImageSpan>
-                      <Img
-                        src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
-                        alt=""
-                      />
-                    </ImageSpan>
+              if (
+                name.toLowerCase().indexOf(filter.toLowerCase()) > -1 ||
+                String(id).indexOf(filter) > -1
+              ) {
+                return true;
+              }
+            })
+            .map(({ id, name, types }) => {
+              if (!types || !name) {
+                return false;
+              }
+              return (
+                <Link
+                  href="/detail/[pkmn]"
+                  as={`/detail/${id}`}
+                  passHref
+                  key={id}
+                >
+                  <a href="">
+                    <Li>
+                      <ImageSpan>
+                        <Img
+                          src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
+                          alt=""
+                        />
+                      </ImageSpan>
 
-                    <Content type={types ? types[0].type.name : "grey"}>
-                      <PkmnInfo>
-                        <Number>#{("000" + id).slice(-3)}</Number>
-                        <Name>{_.startCase(name)}</Name>
-                        <Title>
-                          {types.map(({ type: { name } }) => (
-                            <Badge type={name} key={name}>
-                              <IconType
-                                src={`/vectors/types/${name}.svg`}
-                                alt="Type Pokemon"
-                              ></IconType>
-                              {_.startCase(name)}
-                            </Badge>
-                          ))}
-                        </Title>
-                      </PkmnInfo>
-                    </Content>
-                  </Li>
-                </a>
-              </Link>
-            );
-          })}
+                      <Content type={types ? types[0].type.name : "grey"}>
+                        <PkmnInfo>
+                          <Number>#{("000" + id).slice(-3)}</Number>
+                          <Name>{_.startCase(name)}</Name>
+                          <Title>
+                            {types.map(({ type: { name } }) => (
+                              <Badge type={name} key={name}>
+                                <IconType
+                                  src={`/vectors/types/${name}.svg`}
+                                  alt="Type Pokemon"
+                                ></IconType>
+                                {_.startCase(name)}
+                              </Badge>
+                            ))}
+                          </Title>
+                        </PkmnInfo>
+                      </Content>
+                    </Li>
+                  </a>
+                </Link>
+              );
+            })}
       </Ul>
     </div>
   );
@@ -129,7 +145,7 @@ const Input = styled.input`
 
 const Ul = styled.ul`
   text-align: justify;
-  ${this}:after {
+  &:after {
     content: "";
     display: inline-block;
     width: 100%;
@@ -150,7 +166,7 @@ const Li = styled.li`
   margin: 5px;
 `;
 
-const Content = styled.div`
+const Content = styled("div")<ChangeColorType>`
   background-color: ${(props) =>
     props.theme.colors.background.type[props.type]};
   height: 85px;
@@ -158,7 +174,7 @@ const Content = styled.div`
   position: absolute;
   bottom: 0;
   border-radius: 15px;
-  ${this}:hover {
+  &:hover {
     cursor: pointer;
     box-shadow: 1px 1px 2px black;
   }
@@ -202,8 +218,8 @@ const Title = styled.div`
   font-size: 12px;
 `;
 
-const Badge = styled.span`
-  background-color: ${(props) => props.theme.colors.type[props.type]};
+const Badge = styled("span")<ChangeColorType>`
+  background-color: ${({ type, theme: { colors } }) => colors.type[type]};
   padding: 3px;
   margin: 0 5px 0px 0px;
   border-radius: 3px;

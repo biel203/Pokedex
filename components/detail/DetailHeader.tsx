@@ -1,6 +1,8 @@
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { useDetailContext } from "../../context/PokeDetail";
+import { ChangeColorType } from "../../interfaces";
 
 export default function DetailHeader() {
   const {
@@ -40,7 +42,7 @@ export default function DetailHeader() {
   );
 }
 
-const Header = styled.header`
+const Header = styled.header<ChangeColorType>`
   margin: 5%;
   padding: 5%;
 `;
@@ -77,7 +79,7 @@ const Title = styled.div`
   font-size: 12px;
 `;
 
-const Badge = styled.span`
+const Badge = styled.span<ChangeColorType>`
   background-color: ${(props) => props.theme.colors.type[props.type]};
   padding: 3px;
   margin: 0 5px 0px 0px;

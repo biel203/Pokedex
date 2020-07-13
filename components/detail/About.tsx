@@ -1,8 +1,10 @@
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 
 import ProgressBar from "../base/ProgressBar";
 import { useDetailContext } from "../../context/PokeDetail";
+import { ChangeColorType } from "../../interfaces";
 
 const dictionary = {
   hp: "HP",
@@ -94,7 +96,7 @@ export default function AboutDetail() {
 
 const Ul = styled.ul`
   text-align: justify;
-  ${this}:after {
+  &:after {
     content: "";
     display: inline-block;
     width: 100%;
@@ -123,6 +125,6 @@ const Convert = styled.span`
   font-size: 10px;
 `;
 
-const LiTitle = styled(Title)`
+const LiTitle = styled(Title)<ChangeColorType>`
   color: ${(props) => props.theme.colors.type[props.type]};
 `;

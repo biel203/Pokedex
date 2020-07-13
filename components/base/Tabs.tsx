@@ -1,12 +1,13 @@
-import * as React from "react";
+import React, { DOMAttributes } from "react";
 import styled from "styled-components";
+import { Panel as IPanel } from "../../interfaces";
 
-const TabContent = styled.div`
+const TabContent = styled("div")<{ tabindex: string }>`
   flex: 1;
   width: 100%;
 `;
 
-const TabPanel = ({ children, label }) => (
+export const Panel = ({ children }: IPanel) => (
   <TabContent role="tabpanel" tabindex="0">
     {children}
   </TabContent>
@@ -23,9 +24,7 @@ interface State {
   selectedTab: number;
 }
 
-class Tabs extends React.Component<Props, State> {
-  static Panel = TabPanel;
-
+export class Tabs extends React.Component<Props, State> {
   state: State = {
     selectedTab: 0,
     tabBreak: "768px",
@@ -74,7 +73,7 @@ const TabsWrapper = styled.div`
   flex-direction: column;
 `;
 
-const TabButton = styled.button`
+const TabButton = styled("button")<{ selected: any }>`
   flex: 1;
   color: white;
   height: 50px;
@@ -90,7 +89,7 @@ const TabButton = styled.button`
   border: none;
 `;
 
-const TabList = styled.div`
+const TabList = styled.div<{ breakPoint: string }>`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -111,5 +110,3 @@ const Content = styled.div`
   padding: 28px;
   background: #e5e5e5;
 `;
-
-export default Tabs;

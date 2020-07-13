@@ -1,3 +1,4 @@
+import React from "react";
 import { getInitialData } from "../../libs/pkmn";
 import PokemonProvider from "../../context/PokeList";
 
@@ -14,7 +15,7 @@ function FourthGen({ pokemonList }) {
 export default FourthGen;
 
 export const getStaticProps = async (ctx) => {
-  const pokemonList = await getInitialData("4")
+  const pokemonList = await getInitialData("4");
 
   return { props: { pokemonList } };
 };

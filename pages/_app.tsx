@@ -1,6 +1,8 @@
+import React from "react";
 import App from "next/app";
 import Theme from "../components/base/Theme";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   html,

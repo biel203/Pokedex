@@ -1,3 +1,4 @@
+import React from "react";
 import { getInitialData } from "../../libs/pkmn";
 import PokemonProvider from "../../context/PokeList";
 
@@ -14,7 +15,7 @@ function ThirdGen({ pokemonList }) {
 export default ThirdGen;
 
 export const getStaticProps = async (ctx) => {
-  const pokemonList = await getInitialData("3")
+  const pokemonList = await getInitialData("3");
 
   return { props: { pokemonList } };
 };

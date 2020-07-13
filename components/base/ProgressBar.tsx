@@ -1,4 +1,15 @@
 import styled from "styled-components";
+import React from "react";
+
+export default function App({ percent, background }) {
+  console.log(background);
+  return (
+    <Container>
+      <Background />
+      <Progress percent={percent} color={background} />
+    </Container>
+  );
+}
 
 const Container = styled.div`
   height: 7px;
@@ -20,18 +31,8 @@ const Background = styled(BaseBox)`
   width: 100%;
 `;
 
-const Progress = styled(BaseBox)`
+const Progress = styled(BaseBox)<{ percent: string }>`
   background: ${({ color, theme }) =>
     color ? theme.colors.type[color] : "black"};
   width: ${({ percent }) => percent}%;
 `;
-
-export default function App({ percent, background }) {
-  console.log(background);
-  return (
-    <Container>
-      <Background />
-      <Progress percent={percent} color={background} />
-    </Container>
-  );
-}
